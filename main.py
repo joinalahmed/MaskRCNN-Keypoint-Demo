@@ -73,7 +73,7 @@ def main():
         # class_names = ['BG', 'person']
         results = model.detect_keypoint([frame], verbose=0)
         r = results[0]
-        print(r)
+        print(r['class_ids'])
         if r['masks'].shape[0]:
             for i in range(r['masks'].shape[2]):
                 mask = r['masks'][:, :, i]
@@ -122,10 +122,7 @@ def main():
                                     tuple(Joint_start[:2]),
                                     tuple(Joint_end[:2]),
                                     limb_colors[limb_index], 5)
-        if (args.image):
-            cv.imwrite(outputFile, frame.astype(np.uint8))
-        else:
-            vid_writer.write(frame.astype(np.uint8))
+        vid_writer.write(frame.astype(np.uint8))
 
 
 if __name__ == "__main__":
