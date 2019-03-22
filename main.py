@@ -73,7 +73,7 @@ def main():
         # class_names = ['BG', 'person']
         results = model.detect_keypoint([frame], verbose=0)
         r = results[0]
-        print(r['class_ids'])
+        print(r['class_ids'],r['scores'])
         if r['masks'].shape[0]:
             for i in range(r['masks'].shape[2]):
                 mask = r['masks'][:, :, i]
