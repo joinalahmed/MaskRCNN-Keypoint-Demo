@@ -71,7 +71,7 @@ def main():
         
         print("frame shape:", frame.shape)
         # class_names = ['BG', 'person']
-        results = model.detect_keypoint([frame], verbose=1)
+        results = model.detect_keypoint([frame], verbose=0)
         r = results[0]
         print(r)
         if r['masks'].shape[0]:
