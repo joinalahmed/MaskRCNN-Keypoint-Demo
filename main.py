@@ -18,7 +18,6 @@ class InferenceConfig(coco.CocoConfig):
 
 def main():
     parse = argparse.ArgumentParser()
-    parse.add_argument("--image", type=str)
     parse.add_argument('--video', type=str)
     args = parse.parse_args()
 
@@ -46,13 +45,7 @@ def main():
 
     model.load_weights(COCO_MODEL_PATH, by_name=True)
 
-    if (args.image):
-        if not os.path.isfile(args.image):
-            print("Input image file ", args.image, " doesn't exist")
-            sys.exit(1)
-        cap = cv.VideoCapture(args.image)
-        outputFile = args.image[:-4]+'_mask_rcnn_out_py.jpg'
-    elif (args.video):
+    if (args.video):
         if not os.path.isfile(args.video):
             print("Input video file ", args.video, " doesn't exist")
             sys.exit(1)
@@ -61,8 +54,7 @@ def main():
     else:
         cap = cv.VideoCapture(0)
 
-    if (not args.image):
-        vid_writer = cv.VideoWriter(outputFile,
+    vid_writer = cv.VideoWriter(outputFile,
                                     cv.VideoWriter_fourcc('M', 'J', 'P', 'G'),
                                     30,
                                     (round(cap.get(cv.CAP_PROP_FRAME_WIDTH)),
